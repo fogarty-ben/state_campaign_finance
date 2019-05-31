@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages'
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -53,7 +53,7 @@ MIDDLEWARE = [
 # Added whitenoised based on Heroku tutorial.
 # https://devcenter.heroku.com/articles/django-assets
 
-ROOT_URLCONF = 'state_campaign_finance.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'state_campaign_finance.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
