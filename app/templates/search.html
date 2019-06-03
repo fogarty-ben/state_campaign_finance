@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for term in query_terms %}
+        {{ term }}
+    {% endfor %}
+{% endblock %}
