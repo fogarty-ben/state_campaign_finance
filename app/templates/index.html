@@ -1,5 +1,18 @@
-<html>
-    <body>
-        <h1>Hello world!</h1>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">State Campaign Finance Project</h1>
+  <p class="lead">An integrated state campaign finance resoucre for [list states here].</p>
+  <form>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+             <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+        </div>
+        <div class='form-group col-md-2'>
+              <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
