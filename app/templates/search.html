@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for term in query_terms %}
-        {{ term }}
-    {% endfor %}
+<div class="container-fluid">
+      <div class="row">
+            <div class="col">
+                <h2>Search</h2>
+            </div>
+      </div>
+    {% include 'search_form.html' %}
+</div>
 {% endblock %}

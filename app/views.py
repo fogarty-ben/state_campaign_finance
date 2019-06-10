@@ -7,7 +7,7 @@ def index(request):
     return render(request, 'index.html')
 
 def search_results(request):
-    context = {'query_terms': [request.GET['query']] * 5}
-    print(request.GET)
+    context = {key: val for key, val in request.POST.items() if val != ''}
+    print(context)
     return render(request, 'search.html', context)
 

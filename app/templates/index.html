@@ -3,16 +3,8 @@
 {% block content %}
 <div class="jumbotron">
   <h1 class="display-4">State Campaign Finance Project</h1>
-  <p class="lead">An integrated state campaign finance resoucre for [list states here].</p>
-  <form>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-             <input type="text" class="form-control" name='query'>
-        </div>
-        <div class='form-group col-md-2'>
-              <button type="submit" formaction="{% url 'search' %}" method="get"class="btn btn-primary">Search</button>
-        </div>
-    </div>
-  </form>
+  <p class="lead">An integrated state campaign finance resoucre for California & Texas.</p>
+  {% include 'search_form.html' %}
 </div>
+
 {% endblock %}
