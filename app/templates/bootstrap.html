@@ -21,6 +21,113 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script>
+            var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                width = 1100 - margin.left - margin.right,
+                height = 800 - margin.top - margin.bottom;
+
+            var svg = d3.select("#theVis")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                      "translate(" + margin.left + "," + margin.top + "");
+
+    // Reformat the data: we need an array of arrays of {x, y} tuples
+    // I strongly advise to have a look to dataReady with
+    // console.log(dataReady)
+
+    // A color scale: one color for each group
+    let mainText = svg.append("g")
+    mainText.append("text")
+        .attr("x", width / 2)  // space legend
+        .attr("y", 60)
+        .attr("text-anchor", "middle")
+        .text("SUMMARY CHARTS")
+        .style("font-size", "70px");
+
+    // Add X axis --> it is a date format
+    mainText.append("text")
+        .attr("x", width / 4)  // space legend
+        .attr("y", 130)
+        .attr("text-anchor", "middle")
+        .text("CONTRIBUTIONS PER DAY")
+        .style("font-size", "30px");
+
+    mainText.append("text")
+        .attr("x", width * (3 / 4)) // space legend
+        .attr("y", 130)
+        .attr("text-anchor", "middle")
+        .text("CONTRIBUTIONS PER DAY")
+        .style("font-size", "30px");
+
+    mainText.append("text")
+        .attr("x", width * (3 / 4)) // space legend
+        .attr("y", 130)
+        .attr("text-anchor", "middle")
+        .text("CONTRIBUTIONS PER DAY")
+        .style("font-size", "30px");
+
+    var x_total = d3.scaleTime()
+    .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
+      .range([ 60, width / 2 - 60]);
+    var y_total = d3.scaleLinear()
+      .domain( [0,1000])
+      .range([ height - 100, 180]);
+
+    svg.append("g")
+      .attr("transform", "translate(0," + (height - 100) + ")")
+      .call(d3.axisBottom(x_total));
+    svg.append("g")
+      .attr("transform", "translate(" + 60 + ",0)")
+      .call(d3.axisLeft(y_total));
+
+
+    var valueline = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.close); });
+
+    var valueline2 = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.open); });
+
+    /*
+    svg.append("path")
+        .data([data])
+        .attr("class", "line")
+        .attr("d", valueline);
+
+    // Add the valueline2 path.
+    svg.append("path")
+        .data([data])
+        .attr("class", "line")
+        .style("stroke", "red")
+        .attr("d", valueline2);
+    */
+
+
+    var x_amount = d3.scaleTime()
+    .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
+      .range([width / 2 + 70, width]);
+    var y_amount = d3.scaleLinear()
+      .domain( [0,1000])
+      .range([ height - 100, 180]);
+
+    svg.append("g")
+      .attr("transform", "translate(0," + (height - 100) + ")")
+      .call(d3.axisBottom(x_amount));
+    svg.append("g")
+      .attr("transform", "translate(" + (width / 2 + 70) + ",0)")
+      .call(d3.axisLeft(y_amount));
+
+
+
+
+
+        </script>
+
     </body>
 
 </html>

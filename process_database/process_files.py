@@ -52,27 +52,27 @@ def zipfile_load(table, row, response):
     with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
         print("starting")
         zip_ref.extractall("new_data/")
-        path = "new_data/" + row[7]
-        print("success")
-        items_in_path = os.listdir(path)
-        print(items_in_path)
-        if not row[5]:
-            csvfile_local(table, row[6], row)
-        if row[5]:
-            count = 1
+    path = "new_data/" + row[7]
+    print("success")
+    items_in_path = os.listdir(path)
+    print(items_in_path)
+    if not row[5]:
+        csvfile_local(table, row[6], row)
+    if row[5]:
+        count = 1
+        new_row = row[5] + str(count) + ".csv"
+        new_row_alt = row[5] + "0" + str(count) + ".csv"
+        print(new_row, new_row_alt)
+        while (new_row in items_in_path or new_row_alt in items_in_path):
+            print(new_row, new_row_alt)
+            if new_row in items_in_path:
+                csvfile_local(table, path + new_row, row)
+            elif new_row_alt in items_in_path:
+                csvfile_local(table, path + new_row_alt, row)     
+            count += 1
             new_row = row[5] + str(count) + ".csv"
             new_row_alt = row[5] + "0" + str(count) + ".csv"
-            print(new_row, new_row_alt)
-            while (new_row in items_in_path or new_row_alt in items_in_path):
-                print(new_row, new_row_alt)
-                if new_row in items_in_path:
-                    csvfile_local(table, path + new_row, row)
-                elif new_row_alt in items_in_path:
-                    csvfile_local(table, path + new_row_alt, row)     
-                count += 1
-                new_row = row[5] + str(count) + ".csv"
-                new_row_alt = row[5] + "0" + str(count) + ".csv"
-        shutil.rmtree(path)
+    shutil.rmtree(path)
 
 def csvfile_local(writer, filename, meta_row):
     with open(filename, "r") as csvfile:
