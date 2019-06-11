@@ -26,17 +26,34 @@
         </thead>
         <tbody>
         <!-- Will duplicate in Django loop -->
+        {% for result in results.object_list %}
             <tr>
-                <td>1/1/2019</td>
-                <td>Committee Name</td>
-                <td>Contributor Name</td>
-                <td>Employer</td>
-                <td>Occupation</td>
-                <td>State</td>
-                <td>Zip Code</td>
-                <td>Amount</td>
+                <td>{% if result.date %}{{ result.date }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.commitee_name %}{{ result.commitee_name}}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_name %}{{ result.contrib_name }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_employer %}{{ result.contrib_employer }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_occupation %}{{ result.contrib_occupation }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_state %}{{ result.contrib_state }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_zip %}{{ result.contrib_zip }}{% else %}N/A{% endif %}</td>
+                <td>{% if result.amount %}${{ result.amount }}{% else %}N/A{% endif %}</td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
+    <div class="row">
+        <div class="col">
+            <div class="centerBlock">
+                {% if results.has_previous %}
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_full_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page=1">&laquo; first</a>
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_full_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page={{ results.previous_page_number }}">previous</a>
+                {% endif %}
+                Page {{ results.number }} of {{ results.paginator.num_pages }}
+                {% if results.has_next %}
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_full_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page={{ results.next_page_number }}">next</a>
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_full_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page={{ results.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
