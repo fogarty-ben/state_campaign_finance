@@ -1,4 +1,4 @@
-# State Campaign Finance
+# State Campaign Finance Project
 
 11 June 2019
 
