@@ -49,7 +49,6 @@ def search_results(request):
     context['results'] = p.get_page(int(context.get('page', 1)))
     return render(request, 'search.html', context)
 
-
 def contribution(request, contribution_id):
     contribution = get_object_or_404(Campaignfinance, pk=contribution_id)
     return render(request, 'contribution.html', {'contribution': contribution})
