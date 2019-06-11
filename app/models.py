@@ -31,3 +31,12 @@ class contributions(models.Model):
     class Meta:
         managed = False
         db_table = 'financelarge'
+
+class interested_user(models.Model):
+    email = models.EmailField(max_length=254)
+    interested_state = models.CharField(max_length=2)
+
+    @classmethod
+    def create(cls, email, state):
+        user = cls(email=email, interested_state=state)
+        return user

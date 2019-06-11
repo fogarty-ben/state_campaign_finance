@@ -1,12 +1,22 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
-from app.models import contributions
+from app.models import contributions, interested_user
 from datetime import datetime
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
+def interested(request):
+    user = interested_user()
+    user.email = request.POST['email']
+    user.interested_state = request.POST['state']
+    user.save()
+    return HttpResponseRedirect(reverse("index"))
+
 
 def search_results(request):
     context = {key: val for key, val in request.GET.items() if val != ''}
