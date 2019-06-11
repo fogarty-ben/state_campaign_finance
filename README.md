@@ -2,8 +2,8 @@
 
 11 June 2019
 
-Project by:
-Ben Fogarty. 
+Project by:  
+Ben Fogarty . 
 Harris School of Public Policy, University of Chicago  
 
 Andrew Friedman  
