@@ -16,9 +16,10 @@
         </div>
         <div class="row">
             <div class="col">
-                <p><strong> {{ contribution.commitee_name }}</strong><br />
-                   {{ contribution.commitee_state}}<br />
-                   ID: {{ contribution.committee_cd }}</p>
+                <p><strong> {{ contribution.committee_name }}</strong><br />
+                   ID: {{ contribution.committee_cd }}<br />
+                   {{ contribution.committee_state}}
+                   </p>
             </div>
 
         </div>
@@ -29,13 +30,17 @@
         </div>
         <div class="row">
             <div class="col">
-                <p><strong> {{ contribution.contrib_org }} </strong></p>
+                <p><strong>{% if contribution.contrib_first %}{{ contribution.contrib_first }}{% endif %} 
+                    {% if contribution.contrib_middle %}{{ contribution.contrib_middle }}{% endif %} 
+                    {% if contribution.contrib_last %}{{ contribution.contrib_last }}{% endif %}
+                    {% if contribution.contrib_org %}{{ contribution.contrib_org}}{% endif %}</strong></p>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <p>{{ contribution.contrib_addr_line_1 }} {% if contribution.contrib_addr_line_2 %}, {{ contribution.contrib_addr_line_2 }}{% endif %}<br />
-                {{ contribution.contrib_ctiy }}, {{contribution.contrib_state}} {{ contribution.contrib_zip }}</p>
+                {{ contribution.contrib_zip }}<br />
+                {{contribution.contrib_state}} </p>
             </div>
         </div>
         <div class="row">

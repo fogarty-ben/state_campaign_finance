@@ -5,6 +5,7 @@ from datetime import datetime
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -26,8 +27,11 @@ def search_results(request):
         q = q.filter(committee_name__search=context['committee_name'])
     if 'committee_state' in context:
         q = q.filter(committee_state=context['committee_state'])
-    if 'contrib_full_name' in context:
-        q = q.filter(contrib_full_name__search=context['contrib_full_name'])
+    if 'contrib_name' in context:
+        q = q.filter(Q(contrib_first__search=context['contrib_name']) |
+                     Q(contrib_middle__search=context['contrib_name'])  |
+                     Q(contrib_last__search=context['contrib_name'])  |
+                     Q(contrib_org__search=context['contrib_name']) )
     if 'contrib_zip' in context:
         q = q.filter(contrib_zip=context['contrib_zip'])
     if 'contrib_state' in context:
@@ -35,7 +39,7 @@ def search_results(request):
     if 'contrib_occupation' in context:
         q = q.filter(contrib_occupation__search=context['committee_name'])
     if 'contrib_employer' in context:
-        q = q.filter(contrib_employer__search=context['contrib_full_name'])
+        q = q.filter(contrib_employer__search=context['contrib_employer'])
     if 'min_amount' in context:
         q = q.filter(amount__gte=context['min_amount'])
     if 'max_amount' in context:
@@ -50,5 +54,5 @@ def search_results(request):
     return render(request, 'search.html', context)
 
 def contribution(request, contribution_id):
-    contribution = get_object_or_404(Campaignfinance, pk=contribution_id)
+    contribution = get_object_or_404(contributions, pk=contribution_id)
     return render(request, 'contribution.html', {'contribution': contribution})

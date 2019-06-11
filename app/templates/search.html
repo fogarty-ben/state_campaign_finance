@@ -28,9 +28,12 @@
         <!-- Will duplicate in Django loop -->
         {% for result in results.object_list %}
             <tr>
-                <td>{% if result.date %}{{ result.date }}{% else %}N/A{% endif %}</td>
-                <td>{% if result.commitee_name %}{{ result.commitee_name}}{% else %}N/A{% endif %}</td>
-                <td>{% if result.contrib_name %}{{ result.contrib_name }}{% else %}N/A{% endif %}</td>
+                <td><a href="{% url 'contribution' result.primary_key %}"> {% if result.date %}{{ result.date }}{% else %}N/A{% endif %}</a></td>
+                <td>{% if result.committee_name %}{{ result.committee_name}}{% else %}N/A{% endif %}</td>
+                <td>{% if result.contrib_first %}{{ result.contrib_first }}{% endif %} 
+                    {% if result.contrib_middle %}{{ result.contrib_middle }}{% endif %} 
+                    {% if result.contrib_last %}{{ result.contrib_last }}{% endif %}
+                    {% if result.contrib_org %}{{ result.contrib_org}}{% endif %}</td>
                 <td>{% if result.contrib_employer %}{{ result.contrib_employer }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_occupation %}{{ result.contrib_occupation }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_state %}{{ result.contrib_state }}{% else %}N/A{% endif %}</td>
