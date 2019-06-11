@@ -5,7 +5,7 @@
         <hr>
         <div class="row">
             <div class='col'>
-                <h3>Contribution #(Insert Contribution ID)</h3>
+                <h3>Contribution #{{ contribution.primary_key }}</h3>
             </div>
         </div>
         <hr>
@@ -16,11 +16,11 @@
         </div>
         <div class="row">
             <div class="col">
-                <p><strong>Field 1:</strong> (Insert)</p>
+                <p><strong> {{ contribution.commitee_name }}</strong><br />
+                   {{ contribution.commitee_state}}<br />
+                   ID: {{ contribution.committee_cd }}</p>
             </div>
-            <div class="col">
-                <p><strong>Field 2:</strong> (Insert)</p>
-            </div>
+
         </div>
         <div class="row">
             <div class="col">
@@ -29,10 +29,13 @@
         </div>
         <div class="row">
             <div class="col">
-                <p><strong>Field 1:</strong> (Insert)</p>
+                <p><strong> {{ contribution.contrib_org }} </strong></p>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
-                <p><strong>Field 2:</strong> (Insert)</p>
+                <p>{{ contribution.contrib_addr_line_1 }} {% if contribution.contrib_addr_line_2 %}, {{ contribution.contrib_addr_line_2 }}{% endif %}<br />
+                {{ contribution.contrib_ctiy }}, {{contribution.contrib_state}} {{ contribution.contrib_zip }}</p>
             </div>
         </div>
         <div class="row">
@@ -42,10 +45,8 @@
         </div>
         <div class="row">
             <div class="col">
-                <p><strong>Field 1:</strong> (Insert)</p>
-            </div>
-            <div class="col">
-                <p><strong>Field 2:</strong> (Insert)</p>
+                <p><strong>Amount:</strong> $ {{ contribution.amount }}<br />
+                   <strong>Date:</strong> {{ contribution.date }}</p>
             </div>
         </div>
     </div>
