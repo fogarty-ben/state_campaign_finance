@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <hr>
+      <div class="row">
+            <div class="col">
+                <h2>Search Results</h2>
+            </div>
+      </div>
+      <hr>
+    {% include 'search_form.html' %}
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Committee Name</th>
+                <th scope="col">Contributor Name</th>
+                <th scope="col">Employer</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">State</th>
+                <th scope="col">Zip Code</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Will duplicate in Django loop -->
+            <tr>
+                <td>1/1/2019</td>
+                <td>Committee Name</td>
+                <td>Contributor Name</td>
+                <td>Employer</td>
+                <td>Occupation</td>
+                <td>State</td>
+                <td>Zip Code</td>
+                <td>Amount</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
