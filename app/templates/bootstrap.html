@@ -6,6 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <!-- Bootstrap CSS -->
+        <style>
+            .svg-container {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            vertical-align: top;
+            overflow: hidden;
+            }
+            .svg-content {
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+        </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!-- FontAwesome Kit -->
         {% load static %}
@@ -24,106 +41,88 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script>
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                width = 1100 - margin.left - margin.right,
-                height = 800 - margin.top - margin.bottom;
+                width = 600 - margin.left - margin.right + 20,
+                height = 600 - margin.top - margin.bottom + 20;
 
             var svg = d3.select("#theVis")
                 .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
-                      "translate(" + margin.left + "," + margin.top + "");
-
-    // Reformat the data: we need an array of arrays of {x, y} tuples
-    // I strongly advise to have a look to dataReady with
-    // console.log(dataReady)
-
-    // A color scale: one color for each group
-    let mainText = svg.append("g")
-    mainText.append("text")
-        .attr("x", width / 2)  // space legend
-        .attr("y", 60)
-        .attr("text-anchor", "middle")
-        .text("SUMMARY CHARTS")
-        .style("font-size", "70px");
-
-    // Add X axis --> it is a date format
-    mainText.append("text")
-        .attr("x", width / 4)  // space legend
-        .attr("y", 130)
-        .attr("text-anchor", "middle")
-        .text("CONTRIBUTIONS PER DAY")
-        .style("font-size", "30px");
-
-    mainText.append("text")
-        .attr("x", width * (3 / 4)) // space legend
-        .attr("y", 130)
-        .attr("text-anchor", "middle")
-        .text("CONTRIBUTIONS PER DAY")
-        .style("font-size", "30px");
-
-    mainText.append("text")
-        .attr("x", width * (3 / 4)) // space legend
-        .attr("y", 130)
-        .attr("text-anchor", "middle")
-        .text("CONTRIBUTIONS PER DAY")
-        .style("font-size", "30px");
-
-    var x_total = d3.scaleTime()
-    .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
-      .range([ 60, width / 2 - 60]);
-    var y_total = d3.scaleLinear()
-      .domain( [0,1000])
-      .range([ height - 100, 180]);
-
-    svg.append("g")
-      .attr("transform", "translate(0," + (height - 100) + ")")
-      .call(d3.axisBottom(x_total));
-    svg.append("g")
-      .attr("transform", "translate(" + 60 + ",0)")
-      .call(d3.axisLeft(y_total));
+                  .attr("preserveAspectRatio", "xMinYMin meet")
+                  .attr("viewBox", "0 0 600 600")
+                  .classed("svg-content", true);
 
 
-    var valueline = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.close); });
 
-    var valueline2 = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.open); });
+            let mainText = svg.append("g")
+                .attr("text-anchor", "middle")
 
-    /*
-    svg.append("path")
-        .data([data])
-        .attr("class", "line")
-        .attr("d", valueline);
+            mainText.append("text")
+                .attr("x", width / 2)
+                .attr("y", 60)
+                .attr("text-anchor", "middle")
+                .text("SUMMARY CHARTS")
+                .style("font-size", "25px");
 
-    // Add the valueline2 path.
-    svg.append("path")
-        .data([data])
-        .attr("class", "line")
-        .style("stroke", "red")
-        .attr("d", valueline2);
-    */
+            mainText.append("text")
+                .attr("x", width / 4)
+                .attr("y", 130)
+                .attr("text-anchor", "middle")
+                .text("CONTRIBUTIONS PER DAY")
+                .style("font-size", "10px");
+
+            mainText.append("text")
+                .attr("x", width * (3 / 4)) // space legend
+                .attr("y", 130)
+                .attr("text-anchor", "middle")
+                .text("CONTRIBUTIONS PER DAY")
+                .style("font-size", "10px");
+
+            var x_total = d3.scaleTime()
+            .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
+              .range([ 50, width / 2 + 10]);
+            var y_total = d3.scaleLinear()
+              .domain( [0,1000])
+              .range([ height - 100, 180]);
+
+            svg.append("g")
+              .style("font", "9px Roboto")
+              .attr("text-anchor", "middle")
+              .attr("transform", "translate(0," + (height - 100) + ")")
+              .call(d3.axisBottom(x_total)
+              .ticks(8));
+            svg.append("g")
+              .style("font", "9px Roboto")
+              .attr("transform", "translate(" + 50 + ",0)")
+              .call(d3.axisLeft(y_total));
+
+
+            var valueline = d3.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.close); });
+
+            var valueline2 = d3.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.open); });
+
 
 
     var x_amount = d3.scaleTime()
     .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
-      .range([width / 2 + 70, width]);
+      .range([width / 2 + 40, width]);
     var y_amount = d3.scaleLinear()
       .domain( [0,1000])
       .range([ height - 100, 180]);
 
+
     svg.append("g")
+      .style("font", "9px Roboto")
+      .attr("text-anchor", "middle")
       .attr("transform", "translate(0," + (height - 100) + ")")
-      .call(d3.axisBottom(x_amount));
+      .call(d3.axisBottom(x_amount)
+      .ticks(8));
     svg.append("g")
-      .attr("transform", "translate(" + (width / 2 + 70) + ",0)")
+      .style("font", "9px Roboto")
+      .attr("transform", "translate(" + (width / 2 + 40) + ",0)")
       .call(d3.axisLeft(y_amount));
-
-
-
 
 
         </script>
