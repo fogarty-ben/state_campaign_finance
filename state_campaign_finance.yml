@@ -1,0 +1,4 @@
+name: state_campaign_finance
+channels:
+  - defaults
+prefix: /anaconda3/envs/state_campaign_finance

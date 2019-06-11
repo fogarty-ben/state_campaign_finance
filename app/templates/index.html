@@ -3,9 +3,13 @@
 {% block content %}
 <div class="jumbotron">
   <h1 class="display-4">State Campaign Finance Project</h1>
-  <h4>An integrated state campaign finance resource for Iowa and Texas.</h4>
-  <p>More states coming soon...</p>
-  {% include 'search_form.html' %}
+  <h4>A searchable multi-state campaign finance database</h4>
+  <p> Currently supporting Iowa and Texas, with more states coming soon.<br />
+      Interested in a particular state? Sign-up below and be the first to know once it's included.</p>
+  {% include 'interest_form.html' %}
+</div>
+<div class="container-fluid">
+      {% include 'search_form.html' %}
 </div>
 
 <div id="theVis" style="min-height:600px"></div>

@@ -1,11 +1,10 @@
-  <form id="search_form" action="{% url 'search' %}" method="post">
-    {% csrf_token %}
+  <form id="search_form" action="{% url 'search' %}" method="get">
     <div class="form-row">
       <h5>Candidate Information</h5>
     </div>
     <div class="form-row">
         <div class="form-group col-md-8">
-            <input type="text" class="form-control" name='commitee_name' placeholder="{% if commitee_name %}{{ commitee_name }}{% else %}Candidate/Committee Name{% endif %}">
+            <input type="text" class="form-control" name='committee_name' placeholder="{% if committee_name %}{{ committee_name }}{% else %}Candidate/Committee Name{% endif %}">
         </div>
         <div class="form-group col-md-4">
             <select class="form-control" name="committee_state">
@@ -20,10 +19,10 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <input type="text" class="form-control" name="contibutor_name" placeholder="{% if contrib_full_name %}{{ contrib_full_name }}{% else %}Contributor Name{% endif %}">
+            <input type="text" class="form-control" name="contrib_full_name" placeholder="{% if contrib_full_name %}{{ contrib_full_name }}{% else %}Contributor Name{% endif %}">
         </div>
         <div class="form-group col-md-3">
-            <input type="text" class="form-control" name="contributor_zip" placeholder="{% if contrib_zip %}{{ contrib_zip }}{% else %}Contributor Zip Code{% endif %}">
+            <input type="text" class="form-control" name="contrib_zip" placeholder="{% if contrib_zip %}{{ contrib_zip }}{% else %}Contributor Zip Code{% endif %}">
         </div>
         <div class="form-group col-md-3">
               <select class="form-control" name="contrib_state">
