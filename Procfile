@@ -1,1 +1,2 @@
-web: (bash ./start.sh) & gunicorn project.wsgi 
+release: bash start.sh
+web: gunicorn project.wsgi 
