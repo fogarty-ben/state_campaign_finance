@@ -1,1 +1,1 @@
-web: (bash ./proxy.sh &) & gunicorn project.wsgi 
+web: gunicorn project.wsgi 
