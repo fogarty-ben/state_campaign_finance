@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Campaignfinance
+from app.models import contributions
 
 # Register your models here.
-admin.site.register(Campaignfinance)
+admin.site.register(contributions)
