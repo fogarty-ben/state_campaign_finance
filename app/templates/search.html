@@ -22,13 +22,14 @@
                 <th scope="col">State</th>
                 <th scope="col">Zip Code</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
         <!-- Will duplicate in Django loop -->
         {% for result in results.object_list %}
             <tr>
-                <td><a href="{% url 'contribution' result.primary_key %}"> {% if result.date %}{{ result.date }}{% else %}N/A{% endif %}</a></td>
+                <td>{% if result.date %}{{ result.date }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.committee_name %}{{ result.committee_name}}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_first %}{{ result.contrib_first }}{% endif %} 
                     {% if result.contrib_middle %}{{ result.contrib_middle }}{% endif %} 
@@ -39,6 +40,7 @@
                 <td>{% if result.contrib_state %}{{ result.contrib_state }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_zip %}{{ result.contrib_zip }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.amount %}${{ result.amount }}{% else %}N/A{% endif %}</td>
+                <td><a href="{% url 'contribution' result.primary_key %}">Details</a></td>
             </tr>
         {% endfor %}
         </tbody>
