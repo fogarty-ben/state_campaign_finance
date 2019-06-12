@@ -49,8 +49,8 @@
         <div class="col">
             <div class="centerBlock">
                 {% if results.has_previous %}
-                <a href="?committee_name={{ request.GET.committee_name}}&contrib_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page=1">&laquo; first</a>
-                <a href="?committee_name={{ request.GET.committee_name}}&contrib_name={{ request.GET.full_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page={{ results.previous_page_number }}">previous</a>
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_name={{ request.GET.contrib_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page=1">&laquo; first</a>
+                <a href="?committee_name={{ request.GET.committee_name}}&contrib_name={{ request.GET.contrib_name }}&contrib_zip={{ request.GET.contrib_zip }}&contrib_occupation={{ request.GET.contrib_occupation }}&contrib_employer={{ request.GET.contrib_employer }}&min_amount={{ request.GET.min_amount }}&max_amount={{ request.GET.max_amoun }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}&page={{ results.previous_page_number }}">previous</a>
                 {% endif %}
                 Page {{ results.number }} of {{ results.paginator.num_pages }}
                 {% if results.has_next %}
