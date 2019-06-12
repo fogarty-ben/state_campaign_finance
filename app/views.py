@@ -63,13 +63,13 @@ def search_results(request):
         params['max_amount'] = context['max_amount']
     if 'start_date' in context:
         append = """
-                 (amount >= DATE(%(start_date)s))
+                 (date >= DATE(%(start_date)s))
                  """
         where_clause.append(append)
         params['start_date'] = context['start_date']
     if 'end_date' in context:
         append = """
-                 (amount <= DATE(%(end_date)s))
+                 (date <= DATE(%(end_date)s))
                  """
         where_clause.append(append)
         params['end_date'] = context['end_date']
