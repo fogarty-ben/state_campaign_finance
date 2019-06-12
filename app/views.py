@@ -39,10 +39,10 @@ def search_results(request):
         params['committee_state'] = context['committee_state']
     if 'contrib_zip' in context:
         append = """
-                 (committee_zip = %(committee_zip)s)
+                 (contrib_zip = %(contrib_zip)s)
                  """
         where_clause.append(append)
-        params['committee_zip'] = context['committee_zip']
+        params['contrib_zip'] = context['contrib_zip']
     if 'contrib_state' in context:
         append = """
                  (contrib_state = %(contrib_state)s)
