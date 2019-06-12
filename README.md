@@ -60,3 +60,20 @@ instance save in their enviroment variables as DB_PASS and SECRET_KEY.
 
 This repository is used for exclusively deployent, and the app is deployed to
 Heroku from a private repository that is regularly updated from this repository.
+
+## A Note on Date Warehousing
+
+Currently, data warehousing for this software is handeled manually and encompasses
+manually downloading CSV files from the websites of the supported states then
+running a script to transorm the data. Finally, the data is uploaded to a Google
+Cloud PostgreSQL server. Our hope for the furture is to automate this process,
+but in the meantime, we hope to update data every one to two weeks. Scripts for
+processing these files and a draft schedule are include in the process_database
+directory of our repository. These scripts were designed to easily intergate with
+.CSV files from additional state.
+
+To ease query processing, our data warehouse contains various indexes on all of
+the search fields. Summary files create from the warehoused data are used to
+generate the figures on the front page.
+
+ 
