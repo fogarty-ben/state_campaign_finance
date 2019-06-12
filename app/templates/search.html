@@ -17,8 +17,8 @@
                 <th scope="col">Date</th>
                 <th scope="col">Committee Name</th>
                 <th scope="col">Contributor Name</th>
-                <th scope="col">Employer</th>
                 <th scope="col">Occupation</th>
+                <th scope="col">Employer</th>
                 <th scope="col">State</th>
                 <th scope="col">Zip Code</th>
                 <th scope="col">Amount</th>
@@ -34,8 +34,8 @@
                     {% if result.contrib_middle %}{{ result.contrib_middle }}{% endif %} 
                     {% if result.contrib_last %}{{ result.contrib_last }}{% endif %}
                     {% if result.contrib_org %}{{ result.contrib_org}}{% endif %}</td>
+                     <td>{% if result.contrib_occupation %}{{ result.contrib_occupation }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_employer %}{{ result.contrib_employer }}{% else %}N/A{% endif %}</td>
-                <td>{% if result.contrib_occupation %}{{ result.contrib_occupation }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_state %}{{ result.contrib_state }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.contrib_zip %}{{ result.contrib_zip }}{% else %}N/A{% endif %}</td>
                 <td>{% if result.amount %}${{ result.amount }}{% else %}N/A{% endif %}</td>
