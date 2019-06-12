@@ -43,6 +43,13 @@
                 {{contribution.contrib_state}} </p>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <p>{% if contribution.contrib_occupation %}{{ contribution.contrib_occupation }}<br />{% endif %}
+                   {% if contribution.contrib_employer %}{{ contribution.contrib_employer }}{% endif %}</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <h5>Contribution Information</h5>
