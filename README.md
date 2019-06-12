@@ -3,7 +3,7 @@
 11 June 2019
 
 Project by:  
-Ben Fogarty . 
+Ben Fogarty   
 Harris School of Public Policy, University of Chicago  
 
 Andrew Friedman  
@@ -55,8 +55,8 @@ Anaconda Cloud by running the following command with Anaconda installed:
 conda env create fogarty-ben/state_campaign_finance
 ```
 
-Users must have database credentials and the secret key for their Django
-instance save in their enviroment variables as DB_PASS and SECRET_KEY.
+To stand up an instance, users must have database credentials and the secret key for
+the Django instance saved in their enviroment variables.
 
 This repository is used for exclusively deployent, and the app is deployed to
 Heroku from a private repository that is regularly updated from this repository.
