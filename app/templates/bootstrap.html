@@ -52,6 +52,7 @@
 
 
 
+
             let mainText = svg.append("g")
                 .attr("text-anchor", "middle")
 
@@ -59,28 +60,43 @@
                 .attr("x", width / 2)
                 .attr("y", 60)
                 .attr("text-anchor", "middle")
-                .text("SUMMARY CHARTS")
+                .text("SUMMARY (JAN 2017 - DEC 2018)")
                 .style("font-size", "25px");
 
             mainText.append("text")
                 .attr("x", width / 4)
                 .attr("y", 130)
                 .attr("text-anchor", "middle")
-                .text("CONTRIBUTIONS PER DAY")
-                .style("font-size", "10px");
+                .text("NUMBER PER DAY")
+                .style("font-size", "18px");
 
             mainText.append("text")
-                .attr("x", width * (3 / 4)) // space legend
+                .attr("x", width * (3 / 4) + 40) // space legend
                 .attr("y", 130)
                 .attr("text-anchor", "middle")
-                .text("CONTRIBUTIONS PER DAY")
-                .style("font-size", "10px");
+                .text("AMOUNT PER DAY")
+                .style("font-size", "18px");
+
+            d3.csv("https://raw.githubusercontent.com/fogarty-ben/state_campaign_finance/master/staticfiles/data/date_summary.csv", function(error, data) {
+
+            let new_data = [];
+            let min_date = new Date(2017, 0, 1);
+            let max_date = new Date(2018, 12, 01)
+            data.forEach((value, idx) => {
+                let dateTemp = new Date(value.date);
+                if (dateTemp > min_date && dateTemp < max_date) {
+                    new_data.push(value)
+                }
+            })
+            console.log(new_data)
+
 
             var x_total = d3.scaleTime()
             .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
-              .range([ 50, width / 2 + 10]);
+              .range([50, width / 2 - 10]);
+
             var y_total = d3.scaleLinear()
-              .domain( [0,1000])
+              .domain([0,d3.max(data, function(d) { return Math.max(d.count); })])
               .range([ height - 100, 180]);
 
             svg.append("g")
@@ -96,34 +112,51 @@
 
 
             var valueline = d3.line()
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d.close); });
+                .x(function(d) { return x_total(new Date(d.date)); })
+                .y(function(d) { return y_total(Number(d.count)); });
+
 
             var valueline2 = d3.line()
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d.open); });
+                .x(function(d) { return x_amount(new Date(d.date)); })
+                .y(function(d) { return y_amount(Number(d.amount)); });
 
 
 
-    var x_amount = d3.scaleTime()
-    .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
-      .range([width / 2 + 40, width]);
-    var y_amount = d3.scaleLinear()
-      .domain( [0,1000])
-      .range([ height - 100, 180]);
+            var x_amount = d3.scaleTime()
+            .domain([new Date(2017, 0, 1), new Date(2018, 12, 01)])
+              .range([width / 2 + 60, width]);
+            var y_amount = d3.scaleLinear()
+              .domain([0,d3.max(data, function(d) { return Math.max(d.amount); })])
+              .range([ height - 100, 180]);
+
+            svg.append("g")
+              .style("font", "9px Roboto")
+              .attr("text-anchor", "middle")
+              .attr("transform", "translate(0," + (height - 100) + ")")
+              .call(d3.axisBottom(x_amount)
+              .ticks(8));
+            svg.append("g")
+              .style("font", "9px Roboto")
+              .attr("transform", "translate(" + (width / 2 + 60) + ",0)")
+              .call(d3.axisLeft(y_amount));
+
+          svg.append("path")
+              .data([new_data])
+              .attr("fill", "none")
+              .style("stroke", "black")
+              .attr("d", valueline);
+
+          svg.append("path")
+              .data([new_data])
+              .attr("class", "line")
+              .style("stroke", "red")
+              .attr("fill", "none")
+              .attr("d", valueline2);
+
+  // Add the valueline2 path.
 
 
-    svg.append("g")
-      .style("font", "9px Roboto")
-      .attr("text-anchor", "middle")
-      .attr("transform", "translate(0," + (height - 100) + ")")
-      .call(d3.axisBottom(x_amount)
-      .ticks(8));
-    svg.append("g")
-      .style("font", "9px Roboto")
-      .attr("transform", "translate(" + (width / 2 + 40) + ",0)")
-      .call(d3.axisLeft(y_amount));
-
+        });
 
         </script>
 
